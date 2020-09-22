@@ -24,8 +24,8 @@ Returns:
 Usage:
 
 ```typescript
-// example from locatation relative to index.ts
-import { Houses } from './src/house/houses'
+// example from locatation relative to src/index.ts
+import { Houses } from './house/houses'
 
 // example with anonymous function
 Houses.setWallSuppliesCalculator(( inches: number) => {
@@ -48,16 +48,16 @@ Returns all of the house objects saved in .json files in the `dist/data` folder 
 
 Usage: 
 ```typescript
-// example from locatation relative to index.ts
-import { Houses } from './src/house/houses'
+// example from locatation relative to src/index.ts
+import { Houses } from './house/houses'
 
 const savedHouses = Houses.getAll();
 ```
 
 Converting a Houses object to an array:
 ```typescript
-// example from locatation relative to index.ts
-import { Houses } from './src/house/houses'
+// example from locatation relative to src/index.ts
+import { Houses } from './house/houses'
 
 const savedHouses = Houses.getAll();
 const houses:House[] = [ ...savedHouses.values()];
@@ -78,8 +78,8 @@ Returns:
 
 Usage:
 ```typescript
-// example from locatation relative to index.ts
-import { Houses } from './src/house/houses'
+// example from locatation relative to src/index.ts
+import { Houses } from './house/houses'
 
 const house = Houses.create("Bradley");
 ```
@@ -101,6 +101,8 @@ Usage
 import { Houses } from './src/house/houses'
 
 const house = Houses.create("Bradley");
+house.width = 96;
+house.length = 56;
 Houses.save( house );
 ```
 
