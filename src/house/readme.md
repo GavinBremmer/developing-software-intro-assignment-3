@@ -101,7 +101,7 @@ Usage
 import { Houses } from './src/house/houses'
 
 const house = Houses.create("Bradley");
-house.save();
+Houses.save( house );
 ```
 
 # House
