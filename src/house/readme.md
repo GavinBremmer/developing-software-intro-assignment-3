@@ -97,8 +97,8 @@ Returns:
 
 Usage
 ```typescript
-// example from locatation relative to index.ts
-import { Houses } from './src/house/houses'
+// example from locatation relative to src/index.ts
+import { Houses } from './house/houses'
 
 const house = Houses.create("Bradley");
 house.width = 96;
