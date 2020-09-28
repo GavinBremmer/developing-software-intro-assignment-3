@@ -1,11 +1,9 @@
-import { Arguments, Argv} from "yargs";
-import { Houses } from "../house/houses";
+import { Arguments, Argv } from "yargs";
 import { houseCalculator } from "../wallCalculator";
 
 export function calcWoodNeeded(yargs: Argv) {
     // create a new yargs "command"
     yargs.command(
-        
         // name the command with no spaces
         "calc-wood-needed",
 
@@ -29,21 +27,23 @@ export function calcWoodNeeded(yargs: Argv) {
             inches: {
                 type: "boolean",
                 alias: "i",
-                description: "Specifies that inches are being used as the unit of measure"
+                description:
+                    "Specifies that inches are being used as the unit of measure",
             },
-            
+
             feet: {
                 type: "boolean",
                 alias: "f",
-                description: "Specifies that feet are being used as the unit of measure"
+                description:
+                    "Specifies that feet are being used as the unit of measure",
             },
 
             name: {
                 type: "string",
                 alias: "n",
-                description: "Specifies the name that this house will be stored under"
+                description:
+                    "Specifies the name that this house will be stored under",
             },
-
         },
 
         // define the function we want to run once the arguments are parsed
@@ -58,24 +58,21 @@ export function calcWoodNeeded(yargs: Argv) {
                 l: number;
                 i: boolean;
                 f: boolean;
-                n: string
+                n: string;
             }>
         ) {
+            //populate relevant variables, convert feet to inches if necessary
             let w = args.width;
             let l = args.length;
-            let n = args.name;
+            const n = args.name;
 
-            if(args.feet){
+            if (args.feet) {
                 w = w * 12;
                 l = l * 12;
             }
 
-            houseCalculator(
-                w,
-                l,
-                n
-            );
-
+            //pass into the house calculator
+            houseCalculator(w, l, n);
         }
     );
-};
+}
