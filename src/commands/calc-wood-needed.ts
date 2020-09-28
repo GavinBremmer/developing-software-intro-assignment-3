@@ -1,16 +1,14 @@
 import { Arguments, Argv } from "yargs";
-import { calculateHouseRequirements } from "../wallCalculator";
+import { houseCalculator } from "../wallCalculator";
 
-export function calcWoodNeeded(yargs: Argv): void {
-    
+export function calcWoodNeeded(yargs: Argv) {
     // create a new yargs "command"
     yargs.command(
-        
         // name the command with no spaces
         "calc-wood-needed",
 
         // describe the command so that the --help flag is helpful
-        "Calculate the number of studs required to stick frame a house for Gerald",
+        "Calculate the materials required to frame a house for Gerald",
 
         // define the parameters we need for our command
         {
@@ -25,6 +23,27 @@ export function calcWoodNeeded(yargs: Argv): void {
                 alias: "l",
                 description: "The length of the house",
             },
+
+            inches: {
+                type: "boolean",
+                alias: "i",
+                description:
+                    "Specifies that inches are being used as the unit of measure",
+            },
+
+            feet: {
+                type: "boolean",
+                alias: "f",
+                description:
+                    "Specifies that feet are being used as the unit of measure",
+            },
+
+            name: {
+                type: "string",
+                alias: "n",
+                description:
+                    "Specifies the name that this house will be stored under",
+            },
         },
 
         // define the function we want to run once the arguments are parsed
@@ -32,18 +51,28 @@ export function calcWoodNeeded(yargs: Argv): void {
             args: Arguments<{
                 width: number;
                 length: number;
+                inches: boolean;
+                feet: boolean;
+                name: string;
                 w: number;
                 l: number;
+                i: boolean;
+                f: boolean;
+                n: string;
             }>
         ) {
-            
-            const requirements = calculateHouseRequirements(
-                args.width,
-                args.length
-            );
+            //populate relevant variables, convert feet to inches if necessary
+            let w = args.width;
+            let l = args.length;
+            const n = args.name;
 
-            console.log( requirements );
+            if (args.feet) {
+                w = w * 12;
+                l = l * 12;
+            }
 
+            //pass into the house calculator
+            houseCalculator(w, l, n);
         }
     );
 }
