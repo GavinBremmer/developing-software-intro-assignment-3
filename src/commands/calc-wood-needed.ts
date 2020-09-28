@@ -1,4 +1,5 @@
 import { Arguments, Argv} from "yargs";
+import { Houses } from "../house/houses";
 import { houseCalculator } from "../wallCalculator";
 
 export function calcWoodNeeded(yargs: Argv) {
