@@ -1,19 +1,87 @@
-# Focus College ACSD Assignment 3
+# Gerald's Contracting Application
 
-This respository is intended for the use of Focus College Students enrolled in the Advanced Certificate of Software Development located in Kelowna, BC and Surrey, BC.
+## Setup
+
+To use this application, please follow these instructions:
+
+1. In bash, run the following command to clone the application reository:
+```
+git clone git@github.com:GavinBremmer/developing-software-intro-assignment-3.git Gerald's Contracting Applicaiton
+```
+2. In bash, use the cd command to navigate into the directory that has just been created and cloned into, it will be named "Gerald's Contracting Application"
+```
+cd [cloned directory]
+```
+3. In bash, run the following command to install the programs dependencies:
+```
+npm install
+```
+4. In bash, run the following command to ensure you are on the stable master branch and not the unstable development branch
+```
+git checkout master
+```
+5. In bash, run the tsc command to compile the program
+```
+tsc
+```
 
 ---
 
-You can remove everything below the above line once you're ready to edit this file.
+## calc-wood-needed
 
-## Getting Started
+To calculate the materials required for a house, run:
 
-Please read the [Assignment Requirements](./assignment/assignment.md).
+```
+node dist/index.js calc-wood-needed --width [the outer width of the house without brackets] --length [the outer length of the house without brackets]
+```
 
-## Deadline for Submissions
+If the measurements are in feet, the --feet parameter must be used
 
-The deadline for this assignment is 5PM on THURSDAY SEPTEMBER 24th, 2020.
+```
+node dist/index.js calc-wood-needed --width [the outer width of the house without brackets] --length [the outer length of the house without brackets] --feet
+```
 
-## Notes
+If the measurements are in inches, the --inches parameter can be used optionally, but is not necessary
 
-This is a PUBLIC repository attached to your github account and something that you can demonstrate to potential employers. Take care to ensure professionalism for both you and your team's sake. This will be the first entry into your professional portfolio.
+To save the house under a name use the --name parameter as below. NOTE: if a house by the name used already exists, it will be overwritten without warning
+
+```
+node dist/index.js calc-wood-needed --width [the outer width of the house without brackets] --length [the outer length of the house without brackets] --name [the name to store the house under, without brackets]
+```
+
+---
+
+## recall
+
+To recall a previously saved house, run the following. The program will inform you if the house requested does not exist. If the --name parameter or it's value are absent, the most recent unnamed house ran through the calc-wood-needed command will be recalled.
+```
+node dist/index.js recall --name [the name of the house to recall]
+```
+
+---
+
+## Alias'
+
+Note that for all commands, alias' may be used in place of the command line parameters, these include:
+
+| Parameter | Alias |
+|-|-|
+|--width|-w|
+|--length|-l|
+|--inches|-i|
+|--feet|-f|
+|--name|-n|
+
+---
+
+## Sample Commands
+
+Some sample commands include:
+
+```
+node dist/index.js calc-wood-needed --width 150 --length 100 --name MyHouse
+
+node dist/index.js calc-wood-needed -w 30 -l 10 -f
+
+node dist/index.js recall -n MyHouse
+```
