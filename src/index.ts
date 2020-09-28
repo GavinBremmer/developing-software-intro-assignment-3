@@ -1,12 +1,48 @@
-// import yargs to re-use code from someone else that has already 
-// solved the complexities of parsing command line arguments
-import yargs = require('yargs');
-import { calcWoodNeeded } from './commands/calc-wood-needed';
+import { House } from './house';
+import { Houses } from './house/houses'
+import { IHouse } from './house/interface';
 
-calcWoodNeeded( yargs );
 
-// tell yargs to include the --help flag
-yargs.help();
+// example from locatation relative to index.ts
+Houses.setWallSuppliesCalculator(( inches: number) => {
 
-// tell yargs to parse the parameters
-yargs.parse();
+    // calculation of wall supplies for wall {inches} long here
+
+    let quotient = (inches-7)/192
+    let Section16 = Math.floor((inches-7)/192)
+    
+    let remainderwall = ((quotient-Section16)*192)-(Section16*3.5)
+    
+    let remainderwallstuds = Math.floor((remainderwall-10)/16)+2
+    
+    let remainderwallplates = Math.ceil((remainderwall-7)/96)*3
+    
+    let studs = remainderwallstuds + (Section16*13)
+    
+    let plates= remainderwallplates + (Section16*6)
+    
+    let posts = Section16
+
+    if (inches<240){
+        posts=0
+    }
+
+    return {
+        posts, // set this value
+        studs, // set this value
+        plates // set this value
+    }
+
+});
+
+const house = Houses.create("Tanya");
+house.length = 300
+house.width = 300
+Houses.save( house );
+
+const savedHouses = Houses.getAll();
+
+
+const houses:IHouse[] = [ ...savedHouses.values()];
+
+console.log(houses)
